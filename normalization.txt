@@ -1,0 +1,110 @@
+SOCIAL MEDIA APPLICATION
+
+NORMALIZATION UP TO THIRD NORMAL FORM (3NF)
+
+UNNORMALIZED FORM (UNF)
+
+Initially, data may be stored in a single table containing user details, posts, comments, likes, messages, hashtags, and groups. Such a design leads to data redundancy, update anomalies, insertion anomalies, and deletion anomalies.
+
+Example:
+
+User_ID | Username | Posts | Comments | Likes | Groups
+
+Since multiple posts, comments, and groups can belong to one user, repeating groups occur.
+
+Problems:
+
+1. Data Redundancy
+2. Update Anomaly
+3. Insert Anomaly
+4. Delete Anomaly
+
+---
+
+FIRST NORMAL FORM (1NF)
+
+Rule:
+
+* Atomic values only
+* No repeating groups
+
+Action:
+Separate repeating data into individual entities.
+
+Entities Created:
+
+1. User
+2. Post
+3. Comment
+4. Message
+5. Hashtag
+6. User_Group
+
+Each table contains atomic attributes and unique primary keys.
+
+---
+
+SECOND NORMAL FORM (2NF)
+
+Rule:
+
+* Must already be in 1NF
+* No partial dependency
+
+Analysis:
+
+Composite-key tables:
+
+1. Likes(user_id, post_id)
+2. Follows(follower_id, followee_id)
+3. Group_Membership(user_id, group_id)
+4. Post_Hashtag(post_id, hashtag_id)
+
+All non-key attributes depend on the complete composite key.
+
+Examples:
+
+Likes:
+(user_id, post_id) → liked_at
+
+Group_Membership:
+(user_id, group_id) → join_date
+
+No attribute depends on only part of the composite key.
+
+Therefore, the schema satisfies 2NF.
+
+---
+
+THIRD NORMAL FORM (3NF)
+
+Rule:
+
+* Must already be in 2NF
+* No transitive dependency
+
+Analysis:
+
+User Table:
+user_id → username, email, phone_no, dob, bio
+
+No non-key attribute determines another non-key attribute.
+
+Post Table:
+post_id → user_id, content, visibility, created_at
+
+Comment Table:
+comment_id → user_id, post_id, comment_text
+
+Message Table:
+message_id → sender_id, receiver_id, message_text
+
+No transitive dependencies exist.
+
+Therefore, all tables satisfy Third Normal Form (3NF).
+
+---
+
+CONCLUSION
+
+The Social Media Application database has been normalized up to Third Normal Form (3NF), eliminating redundancy, reducing anomalies, and ensuring data integrity.
