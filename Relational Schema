@@ -1,0 +1,74 @@
+USERS(
+user_id PK,
+username,
+email,
+password,
+phone_no,
+dob,
+bio,
+join_date
+)
+
+POST(
+post_id PK,
+user_id FK REFERENCES USER(user_id),
+content,
+media_url,
+visibility,
+created_at
+)
+
+COMMENT(
+comment_id PK,
+user_id FK REFERENCES USER(user_id),
+post_id FK REFERENCES POST(post_id),
+comment_text,
+created_at
+)
+
+MESSAGE(
+message_id PK,
+sender_id FK REFERENCES USER(user_id),
+receiver_id FK REFERENCES USER(user_id),
+message_text,
+sent_time
+)
+
+HASHTAG(
+hashtag_id PK,
+tag_name
+)
+
+USER_GROUP(
+group_id PK,
+group_name,
+description,
+created_on
+)
+
+LIKES(
+user_id FK REFERENCES USER(user_id),
+post_id FK REFERENCES POST(post_id),
+liked_at,
+PRIMARY KEY(user_id, post_id)
+)
+
+FOLLOWS(
+follower_id FK REFERENCES USER(user_id),
+followee_id FK REFERENCES USER(user_id),
+follow_date,
+PRIMARY KEY(follower_id, followee_id)
+)
+
+GROUP_MEMBERSHIP(
+user_id FK REFERENCES USER(user_id),
+group_id FK REFERENCES USER_GROUP(group_id),
+join_date,
+PRIMARY KEY(user_id, group_id)
+)
+
+POST_HASHTAG(
+post_id FK REFERENCES POST(post_id),
+hashtag_id FK REFERENCES HASHTAG(hashtag_id),
+PRIMARY KEY(post_id, hashtag_id)
+)
