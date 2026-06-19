@@ -169,6 +169,49 @@ JOIN Post P
 ON P.post_id=L.post_id;
 
 -- =====================================================
+-- UPDATE OPERATIONS
+-- =====================================================
+
+UPDATE User
+SET bio='Database Enthusiast'
+WHERE user_id=1;
+
+UPDATE Post
+SET visibility='Friends'
+WHERE post_id=5;
+
+UPDATE User_Group
+SET description='Advanced Java Programming Community'
+WHERE group_id=2;
+
+UPDATE Hashtag
+SET tag_name='#AdvancedSQL'
+WHERE hashtag_id=2;
+-- =====================================================
+-- ALTER OPERATIONS
+-- =====================================================
+
+-- Add new column
+
+ALTER TABLE User
+ADD gender VARCHAR(10);
+
+-- Modify column datatype
+
+ALTER TABLE User
+MODIFY phone_no VARCHAR(20);
+
+-- Rename column
+
+ALTER TABLE User
+RENAME COLUMN gender TO user_gender;
+
+-- Drop column
+
+ALTER TABLE User
+DROP COLUMN user_gender;
+
+-- =====================================================
 -- NESTED QUERIES
 -- =====================================================
 
@@ -198,6 +241,7 @@ FROM Follows
 WHERE follower_id=1
 );
 
+
 -- =====================================================
 -- CORRELATED SUBQUERY
 -- =====================================================
@@ -210,6 +254,24 @@ SELECT COUNT(*)
 FROM Post P
 WHERE P.user_id=U.user_id
 ) > 1;
+
+-- =====================================================
+-- DELETE OPERATIONS
+-- =====================================================
+
+DELETE FROM Likes
+WHERE user_id=2
+AND post_id=1;
+
+DELETE FROM Comment
+WHERE comment_id=5;
+
+DELETE FROM Message
+WHERE message_id=10;
+
+DELETE FROM Group_Membership
+WHERE user_id=10
+AND group_id=5;
 
 -- =====================================================
 -- TOP POSTS BY LIKES
@@ -264,6 +326,28 @@ GROUP BY P.post_id,P.content;
 
 SELECT *
 FROM PostLikesView;
+
+-- =====================================================
+-- INDEXES
+-- =====================================================
+
+CREATE INDEX idx_username
+ON User(username);
+
+CREATE INDEX idx_email
+ON User(email);
+
+CREATE INDEX idx_post_user
+ON Post(user_id);
+
+CREATE INDEX idx_comment_post
+ON Comment(post_id);
+
+CREATE INDEX idx_followee
+ON Follows(followee_id);
+
+CREATE INDEX idx_hashtag
+ON Hashtag(tag_name);
 
 -- =====================================================
 -- STORED PROCEDURE
