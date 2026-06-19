@@ -1,0 +1,130 @@
+CARDINALITY AND PARTICIPATION CONSTRAINTS
+
+1. USER CREATES POST
+
+Cardinality:
+1 : N
+
+Participation:
+User → Partial
+Post → Total
+
+Explanation:
+One user can create many posts.
+Every post must be created by exactly one user.
+
+---
+
+2. USER WRITES COMMENT
+
+Cardinality:
+1 : N
+
+Participation:
+User → Partial
+Comment → Total
+
+Explanation:
+One user can write many comments.
+Every comment must belong to one user.
+
+---
+
+3. POST HAS COMMENT
+
+Cardinality:
+1 : N
+
+Participation:
+Post → Partial
+Comment → Total
+
+Explanation:
+A post may have zero or many comments.
+Each comment belongs to one post.
+
+---
+
+4. USER LIKES POST
+
+Cardinality:
+M : N
+
+Participation:
+User → Partial
+Post → Partial
+
+Explanation:
+Users may like multiple posts.
+Posts may receive likes from multiple users.
+
+---
+
+5. USER FOLLOWS USER
+
+Cardinality:
+M : N (Recursive Relationship)
+
+Participation:
+Partial on both sides
+
+Explanation:
+A user may follow many users and may be followed by many users.
+
+---
+
+6. USER SENDS MESSAGE
+
+Cardinality:
+1 : N
+
+Participation:
+User → Partial
+Message → Total
+
+Explanation:
+One user can send many messages.
+Every message must have a sender.
+
+---
+
+7. USER RECEIVES MESSAGE
+
+Cardinality:
+1 : N
+
+Participation:
+User → Partial
+Message → Total
+
+Explanation:
+One user can receive many messages.
+Every message must have a receiver.
+
+---
+
+8. USER JOINS GROUP
+
+Cardinality:
+M : N
+
+Participation:
+Partial on both sides
+
+Explanation:
+Users may join multiple groups.
+Groups may contain multiple users.
+
+---
+
+9. POST CONTAINS HASHTAG
+
+Cardinality:
+M : N
+
+Participation:
+Partial on both sides
+
+Explanation:
+A post may contain many hashtags.
+A hashtag may appear in many posts.
