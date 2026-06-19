@@ -1,0 +1,110 @@
+DATA DICTIONARY
+
+TABLE: USER
+
+Attribute | Data Type   | Constraints        | Description
+------------------------------------------------------------
+user_id   | INT         | PK, AUTO_INCREMENT | Unique User ID
+username  | VARCHAR(50) | UNIQUE, NOT NULL   | Username
+email     | VARCHAR(100)| UNIQUE, NOT NULL   | User Email
+password  | VARCHAR(255)| NOT NULL | Password
+phone_no  | VARCHAR(15) | UNIQUE | Phone Number
+dob       | DATE        | - | Date of Birth
+bio       | TEXT        | - | User Biography
+join_date | DATE        | DEFAULT CURRENT_DATE | Registration Date
+
+---
+
+TABLE: POST
+
+Attribute | Data Type | Constraints
+------------------------------------
+post_id   | INT       | PK
+user_id   | INT       | FK
+content   | TEXT      | -
+media_url | VARCHAR(255) | -
+visibility| ENUM      | DEFAULT 'Public'
+created_at| TIMESTAMP | DEFAULT CURRENT_TIMESTAMP
+
+---
+
+TABLE: COMMENT
+
+Attribute    | Data Type | Constraints
+---------------------------------------
+comment_id   | INT       | PK
+user_id      | INT       | FK
+post_id      | INT       | FK
+comment_text | TEXT      | NOT NULL
+created_at   | TIMESTAMP   | DEFAULT CURRENT_TIMESTAMP
+
+---
+
+TABLE: MESSAGE
+
+Attribute | Data Type | Constraints
+------------------------------------
+message_id | INT | PK
+sender_id | INT | FK
+receiver_id | INT | FK
+message_text | TEXT | NOT NULL
+sent_time | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP
+
+---
+
+TABLE: HASHTAG
+
+Attribute | Data Type | Constraints
+------------------------------------
+hashtag_id | INT | PK
+tag_name | VARCHAR(50) | UNIQUE
+
+---
+
+TABLE: USER_GROUP
+
+Attribute | Data Type | Constraints
+------------------------------------
+group_id | INT | PK
+group_name | VARCHAR(100) | NOT NULL
+description | TEXT | -
+created_on | DATE | DEFAULT CURRENT_DATE
+
+---
+
+TABLE: LIKES
+
+Attribute | Data Type | Constraints
+------------------------------------
+user_id | INT | PK, FK
+post_id | INT | PK, FK
+liked_at | TIMESTAMP | DEFAULT CURRENT_TIMESTAMP
+
+---
+
+TABLE: FOLLOWS
+  
+Attribute | Data Type | Constraints
+------------------------------------
+follower_id | INT | PK, FK
+followee_id | INT | PK, FK
+follow_date | DATE | DEFAULT CURRENT_DATE
+
+---
+
+TABLE: GROUP_MEMBERSHIP
+
+Attribute | Data Type | Constraints
+---------------------------------------
+user_id | INT | PK, FK
+group_id | INT | PK, FK
+join_date | DATE | DEFAULT CURRENT_DATE
+
+---
+
+TABLE: POST_HASHTAG
+
+Attribute | Data Type | Constraints
+---------------------------------------
+post_id | INT | PK, FK
+hashtag_id | INT | PK, FK
